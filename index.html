@@ -89,6 +89,15 @@
     position: fixed; left: 0; right: 0; bottom: max(10px, env(safe-area-inset-bottom));
     text-align: center; color: #5d6270; font-size: 11px; pointer-events: none;
   }
+  /* AR Quick Look link: shown only where Safari supports rel="ar" (iPhone/iPad) */
+  footer.has-ar { bottom: max(2px, calc(env(safe-area-inset-bottom) - 6px)); line-height: 1.1; }
+  #ar-link {
+    display: none; pointer-events: auto; color: var(--dim); text-decoration: none;
+    width: fit-content; margin: 1px auto 0; align-items: center; gap: 4px; font-size: 10.5px;
+  }
+  footer.has-ar #ar-link { display: flex; }
+  #ar-link img { width: 13px; height: 13px; display: block; }
+  #ar-link span { border-bottom: 1px solid rgba(138, 143, 156, 0.4); }
   #err {
     position: fixed; inset: 0; display: none; place-items: center; padding: 24px;
     text-align: center; color: var(--dim);
@@ -152,12 +161,20 @@
   </div>
 </div>
 
-<footer>ETOPO 10-arc-min elevation - NOAA</footer>
+<footer id="credit">ETOPO 10-arc-min elevation - NOAA
+  <a id="ar-link" rel="ar" href="ar/earth-song.usdz"><img src="ar/earth-song-thumb.png" alt=""><span>View on your table (iPhone AR)</span></a>
+</footer>
+<script>
+  (function () {
+    var a = document.createElement("a");
+    if (a.relList && a.relList.supports && a.relList.supports("ar")) document.getElementById("credit").classList.add("has-ar");
+  })();
+</script>
 <div id="err"></div>
 
 <script type="importmap">
   { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js" } }
 </script>
-<script type="module" src="app.js?v=4"></script>
+<script type="module" src="app.js?v=5"></script>
 </body>
 </html>

@@ -1,0 +1,182 @@
+{
+ "source": "ETOPO 10 arc-min ice-surface grid (NOAA), as bundled in earth3d-kit (repack of PyVista sample ETOPO_10min_Ice.vtp)",
+ "n_lat": 1081,
+ "n_lon": 2161,
+ "vmin": -10421.0,
+ "vmax": 6527.0,
+ "earth_radius_m": 6371000.0,
+ "exaggeration": 60.0,
+ "colour_stops": [
+  [
+   null,
+   "#04101f"
+  ],
+  [
+   -6000.0,
+   "#0a2a52"
+  ],
+  [
+   -4000.0,
+   "#123f74"
+  ],
+  [
+   -2000.0,
+   "#1c5c9c"
+  ],
+  [
+   -600.0,
+   "#2f86c4"
+  ],
+  [
+   -120.0,
+   "#6dbcdd"
+  ],
+  [
+   -1.0,
+   "#a9dcef"
+  ],
+  [
+   0.0,
+   "#2f6b31"
+  ],
+  [
+   400.0,
+   "#4b8038"
+  ],
+  [
+   1100.0,
+   "#7d8f43"
+  ],
+  [
+   2000.0,
+   "#a38b5b"
+  ],
+  [
+   3200.0,
+   "#8d7157"
+  ],
+  [
+   4300.0,
+   "#b5a696"
+  ],
+  [
+   null,
+   "#f4f4f7"
+  ]
+ ],
+ "background": "#05070d",
+ "lights": [
+  {
+   "azimuth": -45,
+   "elevation": 28,
+   "intensity": 0.95
+  },
+  {
+   "azimuth": 110,
+   "elevation": -10,
+   "intensity": 0.22
+  },
+  {
+   "azimuth": 185,
+   "elevation": 45,
+   "intensity": 0.15
+  }
+ ],
+ "voices": {
+  "n_cols": 2160,
+  "n_voices": 24,
+  "bytes_per_col": 74,
+  "voice_lat": [
+   75.0,
+   68.5,
+   62.0,
+   55.5,
+   49.0,
+   42.5,
+   36.0,
+   29.5,
+   23.0,
+   16.5,
+   10.0,
+   3.5,
+   -3.0,
+   -9.5,
+   -16.0,
+   -22.5,
+   -29.0,
+   -35.5,
+   -42.0,
+   -48.5,
+   -55.0,
+   -61.5,
+   -68.0,
+   -74.5
+  ],
+  "note_freqs": [
+   261.6256,
+   293.6648,
+   329.6276,
+   391.9955,
+   440.0001,
+   523.2512,
+   587.3296,
+   659.2552,
+   783.991,
+   880.0001,
+   1046.5024,
+   1174.6592,
+   1318.5104,
+   1567.982,
+   1760.0002,
+   2093.0048
+  ],
+  "gmax": 0.7769622993968145,
+  "amp_floor": 0.045,
+  "harmonics": [
+   1.0,
+   0.4,
+   0.18,
+   0.07
+  ],
+  "drone_gain": 0.2,
+  "variants": {
+   "D": {
+    "step": 10,
+    "accomp": 2,
+    "tau": 0.8,
+    "wet": 0.28,
+    "pad": 0.0,
+    "offbeat": false
+   },
+   "E": {
+    "step": 20,
+    "accomp": 1,
+    "tau": 1.4,
+    "wet": 0.4,
+    "pad": 0.1,
+    "offbeat": false
+   },
+   "F": {
+    "step": 10,
+    "accomp": 2,
+    "tau": 1.0,
+    "wet": 0.32,
+    "pad": 0.08,
+    "offbeat": true
+   }
+  },
+  "default_variant": "F",
+  "mel_lift": 5,
+  "mel_lift_cut": 4,
+  "mel_ceil_cut": 3,
+  "pluck_harm_cut": 0.7,
+  "relief": {
+   "knee_m": 2500.0,
+   "knee_w": 800.0,
+   "lat_mix": 0.5,
+   "amp_cut_db": 3.0,
+   "harm_cut": 0.7
+  },
+  "bpm": 90
+ }
+}

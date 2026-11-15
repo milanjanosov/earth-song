@@ -539,12 +539,30 @@ async function main() {
     song.setPaused(paused);
   }
   async function toggleSound() {
+    soundArmed = false;
     const on = await song.toggle();
     if (paused) song.setPaused(true);
     caps.sound.classList.toggle("on", on);
     caps.sound.setAttribute("aria-pressed", String(on));
     $("i-waves").setAttribute("opacity", on ? "1" : "0.25");
   }
+
+  // Sound is ON by default: browsers only allow audio to start inside a user
+  // gesture, so the button shows ON from load and the engine starts at the
+  // first interaction. An explicit S / button toggle disarms the auto-start.
+  let soundArmed = true;
+  caps.sound.classList.add("on");
+  caps.sound.setAttribute("aria-pressed", "true");
+  $("i-waves").setAttribute("opacity", "1");
+  function ensureSound(e) {
+    if (!soundArmed || song.on) return;
+    if (e.type === "keydown" && ["s", "S", "m", "M"].includes(e.key)) return;
+    if (e.target && e.target.closest && e.target.closest("#k-sound")) return;
+    soundArmed = false;
+    toggleSound();
+  }
+  window.addEventListener("keydown", ensureSound, { capture: true });
+  window.addEventListener("pointerdown", ensureSound, { capture: true });
 
   window.addEventListener("keydown", (e) => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;

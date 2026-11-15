@@ -540,6 +540,7 @@ async function main() {
   }
   async function toggleSound() {
     soundArmed = false;
+    unlockMediaSession();
     const on = await song.toggle();
     if (paused) song.setPaused(true);
     caps.sound.classList.toggle("on", on);
@@ -554,7 +555,26 @@ async function main() {
   caps.sound.classList.add("on");
   caps.sound.setAttribute("aria-pressed", "true");
   $("i-waves").setAttribute("opacity", "1");
+  // iOS: WebAudio is silenced by the ringer/mute switch unless the page also
+  // plays through a media element, which moves the audio session to
+  // "playback". A looping silent <audio> started inside the first touch does
+  // exactly that (the unmute trick); it costs nothing elsewhere.
+  let iosUnlocked = false;
+  function unlockMediaSession() {
+    if (iosUnlocked) return;
+    iosUnlocked = true;
+    try {
+      const a = document.createElement("audio");
+      a.setAttribute("playsinline", "");
+      a.loop = true;
+      a.volume = 0.01;
+      a.src = "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA";
+      a.play().catch(() => { iosUnlocked = false; });
+      document.body.appendChild(a);
+    } catch (e) { iosUnlocked = false; }
+  }
   function ensureSound(e) {
+    unlockMediaSession();
     if (!soundArmed || song.on) return;
     if (e.type === "keydown" && ["s", "S", "m", "M"].includes(e.key)) return;
     if (e.target && e.target.closest && e.target.closest("#k-sound")) return;
@@ -563,6 +583,7 @@ async function main() {
   }
   window.addEventListener("keydown", ensureSound, { capture: true });
   window.addEventListener("pointerdown", ensureSound, { capture: true });
+  window.addEventListener("touchend", ensureSound, { capture: true });
 
   window.addEventListener("keydown", (e) => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;

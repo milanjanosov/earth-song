@@ -166,8 +166,13 @@
 </footer>
 <script>
   (function () {
+    // relList.supports("ar") is unreliable on iOS Safari, so also detect
+    // Apple touch devices directly (iPadOS reports MacIntel + touch).
     var a = document.createElement("a");
-    if (a.relList && a.relList.supports && a.relList.supports("ar")) document.getElementById("credit").classList.add("has-ar");
+    var rel = a.relList && a.relList.supports && a.relList.supports("ar");
+    var apple = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+                (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    if (rel || apple) document.getElementById("credit").classList.add("has-ar");
   })();
 </script>
 <div id="err"></div>

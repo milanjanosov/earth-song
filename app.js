@@ -568,7 +568,7 @@ async function main() {
       a.setAttribute("playsinline", "");
       a.loop = true;
       a.volume = 0.01;
-      a.src = "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA";
+      a.src = "data/silence.wav";
       a.play().catch(() => { iosUnlocked = false; });
       document.body.appendChild(a);
     } catch (e) { iosUnlocked = false; }
